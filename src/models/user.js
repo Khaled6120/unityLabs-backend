@@ -1,4 +1,5 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
+import bcrypt from "bcrypt";
 
 const userSchema = new mongoose.Schema({
 
@@ -23,6 +24,17 @@ const userSchema = new mongoose.Schema({
     }
 }, { timestamps: true });
 
+/**
+ * Runs before the model saves and checks to see if password has been
+ * modified and hashes the password before saving to database
+ */
+userSchema.pre("save", async function (next) {
+    if (!this.isModified("password")) return next();
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+    next();
+});
+
 const User = mongoose.model('User', userSchema);
 
-module.exports = User;
+export default User;
