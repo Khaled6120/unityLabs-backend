@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
-
+import dotenv from 'dotenv';
+dotenv.config();
 /**
  * Generate a json web token for a user
  * @param id The id of the user
