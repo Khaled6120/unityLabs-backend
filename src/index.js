@@ -2,11 +2,13 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import bodyParser from 'body-parser';
-import connectToDatabase from './db/connection.js';
 import { StatusCodes } from 'http-status-codes';
 
 import { AppError } from './utils/apiError.js';
 import { errorHandlerMiddleware } from './utils/globalErrorHandler.js';
+import connectToDatabase from './db/connection.js';
+
+import authRoutes from './routes/authRoutes.js';
 
 dotenv.config();
 
@@ -14,6 +16,11 @@ const app = express();
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+app.use(express.json());
+
+
+// API Routes
+app.use('/api/auth/', authRoutes);
 
 connectToDatabase();
 
