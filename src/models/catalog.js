@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const catalogSchema = new mongoose.Schema({
     seller: {
@@ -14,4 +14,4 @@ const catalogSchema = new mongoose.Schema({
 
 const Catalog = mongoose.model('Catalog', catalogSchema);
 
-module.exports = Catalog;
+export default Catalog;
