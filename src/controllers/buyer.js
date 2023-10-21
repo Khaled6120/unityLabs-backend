@@ -12,7 +12,7 @@ import Catalog from '../models/catalog.js';
 const getListOfSellers = asyncHandler(async (req, res) => {
     const sellers = await User.find({ role: 'seller' }, { name: 1, email: 1, _id: 1 });
     if (!sellers) {
-        return next(new AppError('No sellers found', StatusCodes.NOT_FOUND));
+        return next(new AppError(StatusCodes.NOT_FOUND, 'No sellers found'));
     }
     res.status(StatusCodes.OK).json(sellers);
 });
@@ -23,7 +23,7 @@ const getListOfSellers = asyncHandler(async (req, res) => {
 const getSellerCatalog = asyncHandler(async (req, res) => {
     console.log(req.params.seller_id)
     const seller = await User.findById(req.params.seller_id);
-    if (seller.role !== 'seller') return next(new AppError('This is not a valid seller ID', StatusCodes.NOT_FOUND));
+    if (seller.role !== 'seller') return next(new AppError(StatusCodes.NOT_FOUND, 'This is not a valid seller ID'));
 
     // TODO: check if the seller has any products in their catalog
     const catalog = await Catalog.find({ seller: seller._id }, { products: 1 });
