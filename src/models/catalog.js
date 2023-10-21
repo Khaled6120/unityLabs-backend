@@ -7,8 +7,14 @@ const catalogSchema = new mongoose.Schema({
         required: true
     },
     products: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Product'
+        name: {
+            type: String,
+            required: true
+        },
+        price: {
+            type: Number,
+            required: true,
+        }
     }]
 }, { timestamps: true });
 
