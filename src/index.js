@@ -9,6 +9,7 @@ import { errorHandlerMiddleware } from './utils/globalErrorHandler.js';
 import connectToDatabase from './db/connection.js';
 
 import authRoutes from './routes/authRoutes.js';
+import buyerRoutes from './routes/buyerRoutes.js';
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ app.use(express.json());
 
 // API Routes
 app.use('/api/auth/', authRoutes);
+app.use('/api/buyer/', buyerRoutes);
 
 connectToDatabase();
 
