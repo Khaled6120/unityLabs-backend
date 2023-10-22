@@ -2,12 +2,12 @@ import mongoose from 'mongoose';
 
 const orderSchema = new mongoose.Schema({
     seller: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true
     },
     buyer: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true
     },
