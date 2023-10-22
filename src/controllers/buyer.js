@@ -22,7 +22,6 @@ const getListOfSellers = asyncHandler(async (req, res) => {
 // @route   Get /api/buyer/seller-catalog/:seller_id
 // @access  buyer
 const getSellerCatalog = asyncHandler(async (req, res) => {
-    console.log(req.params.seller_id)
     const seller = await User.findById(req.params.seller_id);
     if (seller.role !== 'seller') return next(new AppError(StatusCodes.NOT_FOUND, 'This is not a valid seller ID'));
 
@@ -68,8 +67,8 @@ const createOrder = asyncHandler(async (req, res, next) => {
 
     // Create the order
     const order = new Order({
-        buyer: req.user.name,
-        seller: seller.name,
+        buyer: req.user._id,
+        seller: seller_id,
         products: items.map(item => ({
             name: item.name,
         })),
