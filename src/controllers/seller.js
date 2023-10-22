@@ -4,6 +4,7 @@ import { StatusCodes } from 'http-status-codes';
 import { AppError } from '../utils/apiError.js';
 import User from '../models/user.js';
 import Catalog from '../models/catalog.js';
+import Order from '../models/order.js';
 
 
 
@@ -31,6 +32,19 @@ const createCatalog = asyncHandler(async (req, res, next) => {
     }
 });
 
-export { createCatalog };
+
+// @desc    Get All orders belong to a seller
+// @route   GET /api/seller/orders
+// @access  ONLY SELLERS
+const getAllOrders = asyncHandler(async (req, res, next) => {
+    const loggedInUser = req.user;
+
+    // Find all orders belonging to the logged-in seller
+    const orders = await Order.find({ seller: loggedInUser._id })
+
+    res.status(StatusCodes.OK).json({ success: true, order_Number: orders.length, orders });
+});
+
+export { createCatalog, getAllOrders };
 
 
