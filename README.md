@@ -19,10 +19,16 @@ To run this project on your local machine, follow these steps:
 
    ```bash
    git clone https://github.com/Khaled6120/unityLabs-backend-assignment.git
+
+
+2. Navigate to the directory:
+   ```bash
    cd unityLabs-backend-assignment
+3. Install all the dependencies
+   ```bash
    npm install
 
-2. Create a `.env file` in the project root and define the following variables:
+4. Create a `.env file` in the project root and define the following variables:
 
 - `PORT:` The port number to run the server on. <br />
 - `MONGODB_URI:` The URI for your MongoDB database. <br />
@@ -37,7 +43,7 @@ Here's an example `.env file`:
 
 
 ```
-3. Start the server using the following command: 
+5. Start the server using the following command: 
 `npm run start`
 
 Your e-commerce marketplace REST API should now be running on your local machine.
