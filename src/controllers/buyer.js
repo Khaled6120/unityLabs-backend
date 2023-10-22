@@ -25,7 +25,6 @@ const getSellerCatalog = asyncHandler(async (req, res) => {
     const seller = await User.findById(req.params.seller_id);
     if (seller.role !== 'seller') return next(new AppError(StatusCodes.NOT_FOUND, 'This is not a valid seller ID'));
 
-    // TODO: check if the seller has any products in their catalog
     const catalog = await Catalog.find({ seller: seller._id }, { products: 1 });
     res.status(StatusCodes.OK).json(catalog);
 });
@@ -34,7 +33,6 @@ const getSellerCatalog = asyncHandler(async (req, res) => {
 // @route   Post /api/buyer/create-order/:seller_id
 // @access  buyer
 const createOrder = asyncHandler(async (req, res, next) => {
-
     const { seller_id } = req.params;
     const { items } = req.body;
 
@@ -55,7 +53,6 @@ const createOrder = asyncHandler(async (req, res, next) => {
     const itemSellers = new Set(items.map(item => sellerCatalog.products.find(product => product.name.toUpperCase() === item.name.toUpperCase())));
     itemSellers.delete(undefined);
     if (items.length !== itemSellers.size) {
-        console.log(items.length, itemSellers.size)
         return next(new AppError(StatusCodes.BAD_REQUEST, 'All items should belong to the same sellerr'));
     }
 

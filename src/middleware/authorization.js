@@ -23,7 +23,6 @@ const protect = asyncHandler(
         ) {
             token = req.headers.authorization.split(' ')[1];
         }
-        console.log(token)
         if (!token) {
             return next(
                 new AppError(
